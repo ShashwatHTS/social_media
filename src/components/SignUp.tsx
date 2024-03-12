@@ -48,7 +48,7 @@ const SignUp = () => {
       const response = await axios.post("http://localhost:3000/api/user", {
         ...values,
       });
-      console.log("value-------->", values);
+      // console.log("value-------->", values);
       router.push("/");
     } catch (error) {}
     // return response;
@@ -63,7 +63,7 @@ const SignUp = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="Shashwat" {...field} />
+                  <Input placeholder="name" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -76,7 +76,7 @@ const SignUp = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="shashwat@1021" {...field} />
+                  <Input placeholder="username" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -89,7 +89,7 @@ const SignUp = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="shashwt@gmail.com" {...field} />
+                  <Input type="email" placeholder="email@gmail.com" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -101,7 +101,7 @@ const SignUp = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="password" {...field} />
+                  <Input type="password" placeholder="password" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -113,7 +113,7 @@ const SignUp = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="+91 1234567890" {...field} />
+                  <Input placeholder="9621938984" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
