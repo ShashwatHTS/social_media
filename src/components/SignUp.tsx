@@ -4,58 +4,139 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
+import { useForm } from "react-hook-form";
+
+const formSchema = z.object({
+  username: z.string().min(2, {
+    message: "Username must be at least 2 characters.",
+  }),
+  email: z.string().email({
+    message: "Must be a valid email.",
+  }),
+  password: z.string().min(6, {
+    message: "Password must be at least 6 characters.",
+  }),
+  phone: z.string().min(10, {
+    message: "Phone number must be at least 10 characters.",
+  }),
+  img: z.string(),
+  name: z.string().min(2, {
+    message: "Username must be at least 2 characters.",
+  }),
+});
+
+// 1. Define your form.
 
 const SignUp = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
-  const [img, setImg] = useState("");
-  const [name, setName] = useState("");
-  const route = useRouter();
-  const handleSubmit = async () => {
-    const response = await axios.post("http://localhost:3000/api/user", {
-      username,
-      email,
-      password,
-      phone,
-      img,
-      name,
-    });
-    return response;
+  const router = useRouter();
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+      phone: "",
+      img: "",
+      name: "",
+    },
+  });
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const response = await axios.post("http://localhost:3000/api/user", {
+        ...values,
+      });
+      console.log("value-------->", values);
+      router.push("/");
+    } catch (error) {}
+    // return response;
   };
   return (
-    <section className="h-screen flex items-center justify-center">
-      <div className="container w-1/2 h-100 py-10 bg-black rounded-sm flex flex-col justify">
-        <div className="text-4xl font-bold text-white m-5">Register </div>
-        <Input
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="username"
-        ></Input>
-        <Input
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-        ></Input>
-        <Input
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        ></Input>
-        <Input
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Name"
-        ></Input>
-        <Input
-          onChange={(e) => setPhone(e.target.value)}
-          placeholder="Phone"
-        ></Input>
-        <Input
-          onChange={(e) => setImg(e.target.value)}
-          placeholder="ImageUrl"
-        ></Input>
-        <Button onClick={handleSubmit} className="mt-2 btn btn-primary">
-          Submit
-        </Button>
-      </div>
+    <section className="flex items-center justify-center   p-5 rounded-md bg-gradient-to-r from-[#1c6e89] to-[#7c7eb1]">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-top-5">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input placeholder="Shashwat" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input placeholder="shashwat@1021" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input placeholder="shashwt@gmail.com" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input placeholder="password" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="phone"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input placeholder="+91 1234567890" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="img"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input placeholder="img url" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <Button className="mt-7 items-center justify-center" type="submit">
+            Submit
+          </Button>
+        </form>
+      </Form>
     </section>
   );
 };
