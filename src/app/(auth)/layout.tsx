@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { Inter } from 'next/font/google'
 import { ThemeProvider } from "@/components/theme-provider";
 import Theme from '@/components/Theme';
@@ -11,23 +10,23 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }: Readonly<{
-    children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
   return (
     <html lang='en'>
-          <body className={inter.className}>
-              <ThemeProvider
-              attribute="class"
+      <body className={inter.className}>
+        <ThemeProvider
+          attribute="class"
           defaultTheme="system"
           enableSystem
-                  disableTransitionOnChange
+          disableTransitionOnChange
         >
           <div className='fixed top-0 right-0 p-4'>
-                  <Theme/>
+            <Theme />
           </div>
-                {children}
-        <footer></footer>
-                  </ThemeProvider>
+          {children}
+          <footer></footer>
+        </ThemeProvider>
       </body>
     </html>
   )
