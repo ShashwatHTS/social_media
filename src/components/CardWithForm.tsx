@@ -32,7 +32,7 @@ export function CardWithForm({
         <div className="pl-2 m-0 lowercase justify-center">
           <small>
             {nextDiscription}
-            <Link href={`/${link}`} className="pl-2 text-voilet-500">
+            <Link href={`/${link}`} className="pl-2 text-blue-500 underline">
               {link}
             </Link>
           </small>
