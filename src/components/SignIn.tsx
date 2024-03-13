@@ -41,7 +41,7 @@ const SignIn = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await login(values.email, values.password);
-      console.log("value-------->", values);
+      // console.log("value-------->", values);
       router.push("/");
     } catch (error) {}
     // return response;
@@ -56,7 +56,7 @@ const SignIn = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="shashwt@gmail.com" {...field} />
+                  <Input type="email" placeholder="email@gmail.com" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -68,7 +68,7 @@ const SignIn = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="password" {...field} />
+                  <Input type="password" placeholder="password" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
