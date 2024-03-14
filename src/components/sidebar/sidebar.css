@@ -1,6 +1,4 @@
 .sidebar {
-
-
   flex: 1 1 150px;
   height: calc(100vh - 50px);
   overflow-y: scroll;
@@ -34,9 +32,7 @@
   margin-bottom: 20px;
 }
 
-.sidebarIcon {
-  margin-right: 15px;
-}
+
 
 .sidebarButton {
   width: 150px;
