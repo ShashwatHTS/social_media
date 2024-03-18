@@ -36,6 +36,9 @@ export default function Profile() {
           </div>
         </div>
       </div>
+      <div>
+        <h1>hi</h1>
+      </div>
     </>
   );
 }
